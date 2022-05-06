@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Chromizer: find main hue of the image." />
+    <link rel="icon" href="./favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="./index.css" />
+    <title>Chromizer</title>
+  </head>
+  <body>
+    <header>
+      <label for="upload">Upload a image: </label>
+      <input type="file" name="upload" id="upload" accept="image/*" />
+    </header>
+
+    <main>
+      <div id="canvas-wrapper">
+        <canvas id="canvas"></canvas>
+      </div>
+
+      <aside>
+        <label for="k">Specify the count of colors: </label>
+        <input
+          type="range"
+          id="k-input"
+          name="k"
+          min="1"
+          max="8"
+          value="4"
+          list="k-marks"
+        />
+        <ul id="palette"></ul>
+      </aside>
+    </main>
+
+    <footer>
+      <a href="https://github.com/fralonra/chromizer">Goto Repository</a>
+    </footer>
+
+    <div id="modal" style="display: none">
+      <div id="loading"></div>
+    </div>
+
+    <datalist id="k-marks">
+      <option value="1" label="1"></option>
+      <option value="2" label="2"></option>
+      <option value="3" label="3"></option>
+      <option value="4" label="4"></option>
+      <option value="5" label="5"></option>
+      <option value="6" label="6"></option>
+      <option value="7" label="7"></option>
+      <option value="8" label="8"></option>
+    </datalist>
+
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <script type="module" src="./dist/index.js"></script>
+  </body>
+</html>
