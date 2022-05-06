@@ -103,6 +103,22 @@ var lib = createCommonjsModule(function(module, exports) {
 });
 var kyrema = lib.kyrema;
 
+// build/dist/utils.js
+function rgbaToHex(r, g, b, a) {
+  const channels = [
+    r.toString(16),
+    g.toString(16),
+    b.toString(16),
+    a.toString(16)
+  ];
+  channels.forEach((channel, i) => {
+    if (channel.length < 2) {
+      channels[i] = "0" + channel;
+    }
+  });
+  return "#" + channels.join("");
+}
+
 // build/dist/index.js
 function main() {
   const canvas = document.getElementById("canvas");
@@ -135,9 +151,20 @@ function main() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.putImageData(new ImageData(activedPalleteIndex > -1 ? renderImageDatas[activedPalleteIndex] : originalImageData, image2.width, image2.height), 0, 0);
     });
+    const hexValue = rgbaToHex(centroid.value[0], centroid.value[1], centroid.value[2], centroid.value[3]);
+    const hexEl = document.createElement("div");
+    hexEl.classList.add("hex");
+    hexEl.textContent = hexValue;
+    const copyHexEl = document.createElement("button");
+    copyHexEl.textContent = "Copy Hex";
+    copyHexEl.addEventListener("click", () => {
+      navigator.clipboard.writeText(hexValue);
+    });
+    hexEl.appendChild(copyHexEl);
     const percentEl = document.createElement("div");
     percentEl.textContent = `${(centroid.count * 100 / (image2.width * image2.height)).toFixed(2)}%`;
     itemEl.appendChild(colorEl);
+    itemEl.appendChild(hexEl);
     itemEl.appendChild(percentEl);
     palette.appendChild(itemEl);
   }
