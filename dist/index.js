@@ -159,11 +159,21 @@ function main() {
         return Math.sqrt(Math.pow(data[0] - centroid[0], 2) + Math.pow(data[1] - centroid[1], 2) + Math.pow(data[2] - centroid[2], 2) + Math.pow(data[3] - centroid[3], 2));
       };
       const averageCalculator = (datas) => {
+        let c0 = 0;
+        let c1 = 0;
+        let c2 = 0;
+        let c3 = 0;
+        for (let i = 0; i < datas.length; i++) {
+          c0 += datas[i][0];
+          c1 += datas[i][1];
+          c2 += datas[i][2];
+          c3 += datas[i][3];
+        }
         const average = [
-          datas.reduce((p, c) => p + c[0], 0) / datas.length,
-          datas.reduce((p, c) => p + c[1], 0) / datas.length,
-          datas.reduce((p, c) => p + c[2], 0) / datas.length,
-          datas.reduce((p, c) => p + c[3], 0) / datas.length
+          c0 / datas.length,
+          c1 / datas.length,
+          c2 / datas.length,
+          c3 / datas.length
         ];
         let minDistance = Number.MAX_SAFE_INTEGER;
         let averageData = datas[0];
