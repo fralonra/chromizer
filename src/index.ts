@@ -86,7 +86,6 @@ function main() {
           originalImageData[i + 3],
         ]);
       }
-      // collection.sort((a, b) => a[0] + a[1] + a[2] - b[0] - b[1] - b[2]);
 
       const distanceCalculator = (data: Color, centroid: Color): number => {
         return Math.sqrt(
@@ -98,12 +97,23 @@ function main() {
       };
 
       const averageCalculator = (datas: Color[]): Color => {
+        let c0 = 0;
+        let c1 = 0;
+        let c2 = 0;
+        let c3 = 0;
+        for (let i = 0; i < datas.length; i++) {
+          c0 += datas[i][0];
+          c1 += datas[i][1];
+          c2 += datas[i][2];
+          c3 += datas[i][3];
+        }
         const average: Color = [
-          datas.reduce((p, c) => p + c[0], 0) / datas.length,
-          datas.reduce((p, c) => p + c[1], 0) / datas.length,
-          datas.reduce((p, c) => p + c[2], 0) / datas.length,
-          datas.reduce((p, c) => p + c[3], 0) / datas.length,
+          c0 / datas.length,
+          c1 / datas.length,
+          c2 / datas.length,
+          c3 / datas.length,
         ];
+
         let minDistance = Number.MAX_SAFE_INTEGER;
         let averageData = datas[0];
         datas.forEach((data) => {
