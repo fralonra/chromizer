@@ -1,4 +1,5 @@
 import { Centroid, kyrema } from 'kyrema';
+import { rgbaToHex } from './utils';
 
 type Color = [number, number, number, number];
 
@@ -58,6 +59,23 @@ function main() {
       );
     });
 
+    const hexValue = rgbaToHex(
+      centroid.value[0],
+      centroid.value[1],
+      centroid.value[2],
+      centroid.value[3],
+    );
+    const hexEl = document.createElement('div');
+    hexEl.classList.add('hex');
+    hexEl.textContent = hexValue;
+
+    const copyHexEl = document.createElement('button');
+    copyHexEl.textContent = 'Copy Hex';
+    copyHexEl.addEventListener('click', () => {
+      navigator.clipboard.writeText(hexValue);
+    });
+    hexEl.appendChild(copyHexEl);
+
     const percentEl = document.createElement('div');
     percentEl.textContent = `${(
       (centroid.count * 100) /
@@ -65,6 +83,7 @@ function main() {
     ).toFixed(2)}%`;
 
     itemEl.appendChild(colorEl);
+    itemEl.appendChild(hexEl);
     itemEl.appendChild(percentEl);
 
     palette.appendChild(itemEl);
